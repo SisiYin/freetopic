@@ -28,46 +28,45 @@ fun MainScreen(
     modifier: Modifier = Modifier,
     moviesViewModel: MoviesViewModel = viewModel()
 ) {
-    var searchWord by remember { mutableStateOf("") }
+    val searchWord = moviesViewModel.searchQuery
     // Fetch movies if not already fetched
     LaunchedEffect(Unit) {
         moviesViewModel.fetchNowPlayingMovies()
-        //moviesViewModel.fetchUpcomingMovies()
     }
-//
-//    val filteredMovies = moviesViewModel.nowPlayingMovies.filter {
-//        it.title.contains(searchWord, ignoreCase = true)
-//    }
+
     val uiState = moviesViewModel.freeTopicUiState
 
+    val filteredMovies = moviesViewModel.getFilteredMovies()
+    val filteredMoviesCount = moviesViewModel.getFilteredMoviesCount()
 
     // Layout
     Column(modifier = modifier) {
 
         OutlinedTextField(
             value = searchWord,
-            onValueChange = { searchWord = it },
+            onValueChange = { moviesViewModel.updateSearchQuery(it) },
             placeholder = { Text("Search Movies") },
             leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Search Icon") },
             modifier = Modifier.fillMaxWidth()
         )
 
         Spacer(modifier = Modifier.height(16.dp))
-        // Show Now Playing Movies
-        //Text("Now Playing Movies", style = MaterialTheme.typography.titleLarge)
-//        MovieList(movies = filteredMovies)
+
+        Text(
+            text = "Search Result: $filteredMoviesCount",
+            style = MaterialTheme.typography.bodyLarge
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
         when (uiState) {
             is FreeTopicUiState.Loading -> LoadingScreen()  // 显示加载动画
             is FreeTopicUiState.Error -> ErrorScreen () // 显示错误 + Retry 按钮
             is FreeTopicUiState.Success -> {
-                val filteredMovies = uiState.movies.filter { it.title.contains(searchWord, ignoreCase = true) }
+//                val filteredMovies = uiState.movies.filter { it.title.contains(searchWord, ignoreCase = true) }
                 MovieList(movies = filteredMovies)  // 显示电影列表
             }
         }
-//        Spacer(modifier = Modifier.height(16.dp))
 //
-//        // Show Upcoming Movies
-//        Text("Upcoming Movies", style = MaterialTheme.typography.titleLarge)
-//        MovieList(movies = moviesViewModel.upcomingMovies)
     }
 }

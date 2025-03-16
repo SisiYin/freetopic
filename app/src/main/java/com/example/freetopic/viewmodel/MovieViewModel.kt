@@ -26,6 +26,23 @@ class MoviesViewModel: ViewModel() {
 
 //    var upcomingMovies = mutableStateListOf<Movie>()
 //        private set
+    var searchQuery by mutableStateOf("") // 搜索关键词
+    private set
+
+    // 更新搜索查询并触发过滤
+    fun updateSearchQuery(query: String) {
+        searchQuery = query
+    }
+
+    // 获取过滤后的电影列表
+    fun getFilteredMovies(): List<Movie> {
+        return nowPlayingMovies.filter { it.title.contains(searchQuery, ignoreCase = true) }
+    }
+
+    // 获取过滤后的电影数量
+    fun getFilteredMoviesCount(): Int {
+        return getFilteredMovies().size
+    }
 
     fun fetchNowPlayingMovies() {
         freeTopicUiState = FreeTopicUiState.Loading
@@ -40,17 +57,4 @@ class MoviesViewModel: ViewModel() {
             }
         }
     }
-
-//    fun fetchUpcomingMovies() {
-//        viewModelScope.launch {
-//            try {
-//                val response = MoviesApi.moviesService.getUpcomingMovies()
-//                upcomingMovies.clear()
-//                upcomingMovies.addAll(response.results)
-//                Log.d("MoviesViewModel", "Successfully fetched Upcoming Movies: ${response.results.size} items")
-//            } catch (e: Exception) {
-//                Log.d("ERROR", "Failed to fetch movies: ${e.message}")
-//            }
-//        }
-//    }
 }
