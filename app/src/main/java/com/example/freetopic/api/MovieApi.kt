@@ -12,7 +12,7 @@ const val API_KEY = "54c539f0a2dca863d152652c08d28924"
 interface MoviesApi {
     @GET("movie/now_playing")
     suspend fun getNowPlayingMovies(
-        @Query("api_key") apiKey: String = API_KEY
+        @Query("api_key") apiKey: String = API_KEY,
     ): MoviesResponse
 
 //    @GET("movie/upcoming?api_key=$API_KEY")

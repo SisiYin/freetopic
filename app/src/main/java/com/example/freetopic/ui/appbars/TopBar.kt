@@ -14,7 +14,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
+import com.example.freetopic.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -22,7 +24,7 @@ fun TopBar(navController: NavController) {
     var expanded by remember { mutableStateOf(false) }
 
     TopAppBar(
-        title = { Text("My App") },
+        title = { Text(stringResource(R.string.app_title)) },
         actions = {
             IconButton(onClick = { expanded = !expanded }) {
                 Icon(Icons.Filled.MoreVert, contentDescription = "More Options")

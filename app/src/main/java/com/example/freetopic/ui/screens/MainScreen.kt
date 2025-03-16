@@ -13,8 +13,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.freetopic.R
 import com.example.freetopic.ui.components.MovieList
 import com.example.freetopic.viewmodel.FreeTopicUiState
 import com.example.freetopic.viewmodel.MoviesViewModel
@@ -41,7 +43,7 @@ fun MainScreen(
         OutlinedTextField(
             value = searchWord,
             onValueChange = { moviesViewModel.updateSearchQuery(it) },
-            placeholder = { Text("Search Movies") },
+            placeholder = { Text(stringResource(R.string.search_word)) },
             leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Search Icon") },
             modifier = Modifier.fillMaxWidth()
         )
@@ -49,18 +51,18 @@ fun MainScreen(
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-            text = "Search Result: $filteredMoviesCount",
+            text = stringResource(R.string.search_result_number, filteredMoviesCount),
             style = MaterialTheme.typography.bodyLarge
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
         when (uiState) {
-            is FreeTopicUiState.Loading -> LoadingScreen()  // 显示加载动画
-            is FreeTopicUiState.Error -> ErrorScreen () // 显示错误 + Retry 按钮
+            is FreeTopicUiState.Loading -> LoadingScreen()
+            is FreeTopicUiState.Error -> ErrorScreen ()
             is FreeTopicUiState.Success -> {
 //                val filteredMovies = uiState.movies.filter { it.title.contains(searchWord, ignoreCase = true) }
-                MovieList(movies = filteredMovies)  // 显示电影列表
+                MovieList(movies = filteredMovies)
             }
         }
 //
