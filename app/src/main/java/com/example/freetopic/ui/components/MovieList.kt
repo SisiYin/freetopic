@@ -1,4 +1,4 @@
-package com.example.freetopic
+package com.example.freetopic.ui.components
 
 import android.icu.text.DecimalFormat
 import androidx.compose.foundation.Image
@@ -38,7 +38,7 @@ fun MovieItem(movie: Movie) {
         Column(
             modifier = Modifier.padding(16.dp)
         ) {
-            // 电影封面
+
             Image(
                 painter = rememberAsyncImagePainter(imageUrl),
                 contentDescription = "Movie Poster",

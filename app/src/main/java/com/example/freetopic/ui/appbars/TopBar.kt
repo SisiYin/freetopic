@@ -1,4 +1,4 @@
-package com.example.freetopic.appbars
+package com.example.freetopic.ui.appbars
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert

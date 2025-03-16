@@ -1,4 +1,4 @@
-package com.example.freetopic
+package com.example.freetopic.ui
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
@@ -8,9 +8,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.freetopic.appbars.BottomBar
-import com.example.freetopic.appbars.ScreenTopBar
-import com.example.freetopic.appbars.TopBar
+import com.example.freetopic.ui.appbars.BottomBar
+import com.example.freetopic.ui.appbars.ScreenTopBar
+import com.example.freetopic.ui.appbars.TopBar
 import com.example.freetopic.ui.screens.InfoScreen
 import com.example.freetopic.ui.screens.MainScreen
 

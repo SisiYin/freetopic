@@ -1,4 +1,4 @@
-package com.example.freetopic.appbars
+package com.example.freetopic.ui.appbars
 
 import androidx.compose.ui.graphics.vector.ImageVector
 data class TabItem (

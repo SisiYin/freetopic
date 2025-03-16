@@ -1,4 +1,4 @@
-package com.example.freetopic
+package com.example.freetopic.api
 
 import com.example.freetopic.model.MoviesResponse
 import retrofit2.Retrofit
